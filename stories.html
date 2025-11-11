@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Истории студентов - ФИТ</title>
     <link rel="stylesheet" href="common.css">
-    <script src="js/scripts.js" defer></script>
     <style>
         .stories-container {
             display: grid;
@@ -361,5 +360,117 @@
             <p>Факультет Информационных Технологий</p>
         </div>
     </footer>
+
+    <script>
+        // ВСТРОЕННЫЙ JAVASCRIPT - гарантированно работает
+        console.log('Скрипт запущен!');
+        
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('DOM загружен!');
+            
+            // Инициализация фильтров
+            initFilters();
+            
+            // Инициализация анимации
+            initAnimation();
+            
+            // Инициализация формы
+            initForm();
+        });
+
+        function initFilters() {
+            const filterCourse = document.getElementById('filterCourse');
+            const filterDepartment = document.getElementById('filterDepartment');
+            const resetBtn = document.getElementById('resetFilters');
+            const noStoriesMsg = document.getElementById('noStoriesMessage');
+
+            if (filterCourse && filterDepartment) {
+                filterCourse.addEventListener('change', applyFilters);
+                filterDepartment.addEventListener('change', applyFilters);
+                
+                if (resetBtn) {
+                    resetBtn.addEventListener('click', function(e) {
+                        e.preventDefault();
+                        filterCourse.value = 'all';
+                        filterDepartment.value = 'all';
+                        applyFilters();
+                    });
+                }
+            }
+
+            function applyFilters() {
+                const courseValue = filterCourse.value;
+                const departmentValue = filterDepartment.value;
+                const stories = document.querySelectorAll('.story-item');
+                let visibleCount = 0;
+
+                stories.forEach(story => {
+                    const storyCourse = story.getAttribute('data-course');
+                    const storyDept = story.getAttribute('data-department');
+
+                    const courseMatch = courseValue === 'all' || storyCourse === courseValue;
+                    const deptMatch = departmentValue === 'all' || storyDept === departmentValue;
+
+                    if (courseMatch && deptMatch) {
+                        story.style.display = 'block';
+                        visibleCount++;
+                    } else {
+                        story.style.display = 'none';
+                    }
+                });
+
+                if (noStoriesMsg) {
+                    noStoriesMsg.style.display = visibleCount === 0 ? 'block' : 'none';
+                }
+            }
+
+            // Применяем фильтры при загрузке
+            applyFilters();
+        }
+
+        function initAnimation() {
+            const stories = document.querySelectorAll('.story-item');
+            stories.forEach((story, index) => {
+                setTimeout(() => {
+                    story.style.opacity = '1';
+                    story.style.transform = 'translateY(0)';
+                }, index * 200);
+            });
+        }
+
+        function initForm() {
+            const form = document.getElementById('storyForm');
+            const textarea = document.getElementById('storyText');
+            const counter = document.getElementById('textCounter');
+
+            if (textarea && counter) {
+                textarea.addEventListener('input', function() {
+                    const remaining = 2000 - this.value.length;
+                    counter.textContent = `Осталось символов: ${remaining}`;
+                    
+                    if (remaining < 100) {
+                        counter.className = 'char-counter warning';
+                    } else if (remaining < 0) {
+                        counter.className = 'char-counter error';
+                    } else {
+                        counter.className = 'char-counter';
+                    }
+                });
+            }
+
+            if (form) {
+                form.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    alert('Форма работает! История отправлена (в реальном проекте здесь была бы отправка на сервер)');
+                    this.reset();
+                    
+                    if (counter) {
+                        counter.textContent = 'Осталось символов: 2000';
+                        counter.className = 'char-counter';
+                    }
+                });
+            }
+        }
+    </script>
 </body>
 </html>
