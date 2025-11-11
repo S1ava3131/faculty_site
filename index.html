@@ -5,10 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Факультет Информационных Технологий - Главная</title>
     <link rel="stylesheet" href="index.css">
-    <script src="js/scripts.js" defer></script>
 </head>
 <body data-page="home">
-    <header>
+    <header id="main-header">
         <nav class="main-nav">
             <ul>
                 <li><a href="index.html" class="active">Главная</a></li>
@@ -19,13 +18,13 @@
         </nav>
     </header>
 
-    <main>
-        <section class="hero">
+    <main id="main-content">
+        <section id="hero-section" class="hero">
             <h1>Факультет Информационных Технологий</h1>
             <p>Готовим специалистов мирового уровня</p>
         </section>
 
-        <section class="features">
+        <section id="features-grid" class="features">
             <div class="feature-card">
                 <h3>Современное образование</h3>
                 <p>Актуальные программы и технологии</p>
@@ -40,7 +39,7 @@
             </div>
         </section>
 
-        <section class="recent-stories">
+        <section id="recent-stories" class="recent-stories">
             <h2>Последние истории студентов</h2>
             <div class="stories-grid">
                 <article class="story-preview">
@@ -55,8 +54,10 @@
         </section>
     </main>
 
-    <footer>
+    <footer id="page-footer">
         <p>Факультет Информационных Технологий</p>
     </footer>
+
+    <script src="js/scripts.js"></script>
 </body>
 </html>
