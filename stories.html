@@ -4,10 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Истории студентов - ФИТ</title>
-    <link rel="stylesheet" href="/faculty_site/common.css">
-    <script src="/faculty_site/js/scripts.js" defer></script>
+    <link rel="stylesheet" href="common.css">
+    <script src="js/scripts.js" defer></script>
     <style>
-        /* Все стили остаются такими же как были */
         .stories-container {
             display: grid;
             gap: 2rem;
@@ -61,7 +60,6 @@
             margin-bottom: 2rem;
         }
         
-        /* Стили формы */
         .form-group {
             margin-bottom: 1.5rem;
         }
@@ -205,27 +203,163 @@
     <header>
         <nav class="main-nav">
             <ul>
-                <li><a href="/faculty_site/index.html">Главная</a></li>
-                <li><a href="/faculty_site/about.html">О факультете</a></li>
-                <li><a href="/faculty_site/stories.html" class="active">Истории студентов</a></li>
-                <li><a href="/faculty_site/contact.html">Контакты</a></li>
+                <li><a href="index.html">Главная</a></li>
+                <li><a href="about.html">О факультете</a></li>
+                <li><a href="stories.html" class="active">Истории студентов</a></li>
+                <li><a href="contact.html">Контакты</a></li>
             </ul>
         </nav>
     </header>
 
     <main class="main-content">
-        <!-- Весь остальной код stories.html остается таким же -->
-        <!-- Только пути в навигации уже исправлены выше -->
+        <div class="page-header">
+            <h1>Истории наших студентов</h1>
+            <p>Реальные истории успеха и достижений</p>
+        </div>
+
+        <section class="stories-filter">
+            <div class="filter-group">
+                <label for="filterCourse">Фильтр по курсу:</label>
+                <select id="filterCourse" class="filter-select">
+                    <option value="all">Все курсы</option>
+                    <option value="1">1 курс</option>
+                    <option value="2">2 курс</option>
+                    <option value="3">3 курс</option>
+                    <option value="4">4 курс</option>
+                    <option value="graduate">Выпускники</option>
+                </select>
+                
+                <label for="filterDepartment">Фильтр по кафедре:</label>
+                <select id="filterDepartment" class="filter-select">
+                    <option value="all">Все кафедры</option>
+                    <option value="software">Программная инженерия</option>
+                    <option value="ai">Искусственный интеллект</option>
+                    <option value="security">Кибербезопасность</option>
+                </select>
+                
+                <button id="resetFilters" class="btn" style="padding: 0.5rem 1rem;">Сбросить фильтры</button>
+            </div>
+        </section>
+
+        <section class="stories-container" id="storiesContainer">
+            <article class="story-item" data-course="3" data-department="software">
+                <div class="story-meta">
+                    <strong>Мария Иванова</strong>
+                    <span class="story-badge">3 курс</span>
+                    <span class="story-badge" style="background: #27ae60;">Программная инженерия</span>
+                </div>
+                <h3>Мой путь в IT: от новичка до стажера в крупной компании</h3>
+                <p>Когда я поступила на факультет, я почти не имела представления о программировании. Благодаря поддержке преподавателей и практическим занятиям, я смогла не только освоить основы, но и получить стажировку в одной из ведущих IT-компаний страны. Особенно полезными оказались курсы по алгоритмам и структурам данных, которые дали прочную основу для решения сложных задач.</p>
+                <div class="story-meta">
+                    <small>Опубликовано: 15.12.2024</small>
+                </div>
+            </article>
+
+            <article class="story-item" data-course="4" data-department="ai">
+                <div class="story-meta">
+                    <strong>Алексей Петров</strong>
+                    <span class="story-badge">4 курс</span>
+                    <span class="story-badge" style="background: #8e44ad;">Искусственный интеллект</span>
+                </div>
+                <h3>Победа в международном хакатоне по машинному обучению</h3>
+                <p>Участие в хакатоне Machine Learning Challenge стало поворотным моментом в моей карьере. Наша команда разработала алгоритм для прогнозирования рыночных тенденций, который занял первое место среди 200 участников. Знания, полученные на курсах "Нейронные сети" и "Обработка больших данных", оказались неоценимыми для этого успеха.</p>
+                <div class="story-meta">
+                    <small>Опубликовано: 10.12.2024</small>
+                </div>
+            </article>
+
+            <article class="story-item" data-course="graduate" data-department="security">
+                <div class="story-meta">
+                    <strong>Екатерина Смирнова</strong>
+                    <span class="story-badge" style="background: #e74c3c;">Выпуск 2022</span>
+                    <span class="story-badge" style="background: #d35400;">Кибербезопасность</span>
+                </div>
+                <h3>Как студенческие проекты помогли построить карьеру в безопасности</h3>
+                <p>Проекты, которые мы выполняли во время учебы, стали отличным портфолио для моего резюме. Сейчас я работаю специалистом по кибербезопасности в финансовом секторе и благодарна факультету за практическую направленность обучения. Курс "Криптография и защита информации" особенно помог в понимании современных угроз и методов защиты.</p>
+                <div class="story-meta">
+                    <small>Опубликовано: 05.12.2024</small>
+                </div>
+            </article>
+        </section>
+
+        <div class="no-stories" id="noStoriesMessage">
+            <h3>Истории не найдены</h3>
+            <p>Попробуйте изменить параметры фильтра или станьте первым, кто поделится своей историей!</p>
+        </div>
+
+        <section class="add-story-section">
+            <h2>Поделитесь своей историей</h2>
+            <form id="storyForm" class="story-form">
+                <div class="form-group">
+                    <label for="studentName" class="form-label">ФИО студента *</label>
+                    <input type="text" id="studentName" class="form-control" required maxlength="100">
+                    <div class="error-message" id="nameError">Пожалуйста, введите ваше ФИО</div>
+                </div>
+
+                <div class="form-group">
+                    <label for="studentCourse" class="form-label">Курс *</label>
+                    <select id="studentCourse" class="form-control" required>
+                        <option value="">Выберите курс</option>
+                        <option value="1">1 курс</option>
+                        <option value="2">2 курс</option>
+                        <option value="3">3 курс</option>
+                        <option value="4">4 курс</option>
+                        <option value="graduate">Выпускник</option>
+                    </select>
+                    <div class="error-message" id="courseError">Пожалуйста, выберите курс</div>
+                </div>
+
+                <div class="form-group">
+                    <label for="studentDepartment" class="form-label">Кафедра *</label>
+                    <select id="studentDepartment" class="form-control" required>
+                        <option value="">Выберите кафедру</option>
+                        <option value="software">Программная инженерия</option>
+                        <option value="ai">Искусственный интеллект</option>
+                        <option value="security">Кибербезопасность</option>
+                    </select>
+                    <div class="error-message" id="departmentError">Пожалуйста, выберите кафедру</div>
+                </div>
+
+                <div class="form-group">
+                    <label for="storyTitle" class="form-label">Заголовок истории *</label>
+                    <input type="text" id="storyTitle" class="form-control" required maxlength="200">
+                    <div class="error-message" id="titleError">Пожалуйста, введите заголовок истории</div>
+                </div>
+
+                <div class="form-group">
+                    <label for="storyText" class="form-label">Текст истории *</label>
+                    <textarea id="storyText" class="form-control" rows="6" required 
+                              placeholder="Расскажите вашу историю успеха, достижений или интересный опыт..."
+                              maxlength="2000"></textarea>
+                    <div class="char-counter" id="textCounter">Осталось символов: 2000</div>
+                    <div class="error-message" id="textError">Пожалуйста, напишите вашу историю</div>
+                </div>
+
+                <div class="form-group">
+                    <label for="studentEmail" class="form-label">Email для связи</label>
+                    <input type="email" id="studentEmail" class="form-control" placeholder="your.email@example.com">
+                    <div class="error-message" id="emailError">Пожалуйста, введите корректный email</div>
+                </div>
+
+                <div class="form-actions">
+                    <button type="submit" class="btn" id="submitBtn">Отправить историю</button>
+                    <button type="reset" class="btn" style="background: #95a5a6;">Очистить форму</button>
+                    <div class="char-counter">
+                        * - обязательные поля
+                    </div>
+                </div>
+                
+                <div class="success-message" id="successMessage">
+                    ✅ Ваша история успешно отправлена! После проверки она будет опубликована.
+                </div>
+            </form>
+        </section>
     </main>
 
     <footer>
         <div class="footer-content">
-            <p>&copy; 2024 Факультет Информационных Технологий. Все права защищены.</p>
+            <p>Факультет Информационных Технологий</p>
         </div>
     </footer>
-
-    <script>
-        // JavaScript код остается таким же
-    </script>
 </body>
 </html>

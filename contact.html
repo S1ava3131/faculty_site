@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Контакты - ФИТ</title>
-    <link rel="stylesheet" href="/faculty_site/common.css">
+    <link rel="stylesheet" href="common.css">
     <style>
         .contact-container {
             display: grid;
@@ -77,17 +77,88 @@
     <header>
         <nav class="main-nav">
             <ul>
-                <li><a href="/faculty_site/index.html">Главная</a></li>
-                <li><a href="/faculty_site/about.html">О факультете</a></li>
-                <li><a href="/faculty_site/stories.html">Истории студентов</a></li>
-                <li><a href="/faculty_site/contact.html" class="active">Контакты</a></li>
+                <li><a href="index.html">Главная</a></li>
+                <li><a href="about.html">О факультете</a></li>
+                <li><a href="stories.html">Истории студентов</a></li>
+                <li><a href="contact.html" class="active">Контакты</a></li>
             </ul>
         </nav>
     </header>
 
     <main class="main-content">
-        <!-- Весь остальной код contact.html остается таким же -->
-        <!-- Только пути в навигации уже исправлены выше -->
+        <div class="page-header">
+            <h1>Свяжитесь с нами</h1>
+            <p>Мы всегда рады ответить на ваши вопросы</p>
+        </div>
+
+        <div class="contact-container">
+            <div class="contact-info">
+                <h2>Контактная информация</h2>
+                
+                <div class="contact-item">
+                    <h3>Адрес</h3>
+                    <p>г. Москва, ул. Студенческая, д. 15<br>Корпус ФИТ, 3 этаж</p>
+                </div>
+                
+                <div class="contact-item">
+                    <h3>Телефоны</h3>
+                    <p>Приемная комиссия: +7 (495) 123-45-67<br>Деканат: +7 (495) 123-45-68</p>
+                </div>
+                
+                <div class="contact-item">
+                    <h3>Email</h3>
+                    <p>fit@university.ru<br>admission@university.ru</p>
+                </div>
+                
+                <div class="contact-item">
+                    <h3>График работы</h3>
+                    <p>Пн-Пт: 9:00 - 18:00<br>Сб: 10:00 - 15:00<br>Вс: выходной</p>
+                </div>
+                
+                <div class="social-links">
+                    <a href="#" class="social-link">VK</a>
+                    <a href="#" class="social-link">Telegram</a>
+                    <a href="#" class="social-link">YouTube</a>
+                </div>
+            </div>
+            
+            <div class="contact-form">
+                <h2>Форма обратной связи</h2>
+                <form>
+                    <div class="form-group">
+                        <label for="contactName" class="form-label">Ваше имя *</label>
+                        <input type="text" id="contactName" class="form-control" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="contactEmail" class="form-label">Email *</label>
+                        <input type="email" id="contactEmail" class="form-control" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="contactSubject" class="form-label">Тема сообщения</label>
+                        <select id="contactSubject" class="form-control">
+                            <option value="">Выберите тему</option>
+                            <option value="admission">Поступление</option>
+                            <option value="education">Обучение</option>
+                            <option value="partnership">Сотрудничество</option>
+                            <option value="other">Другое</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="contactMessage" class="form-label">Сообщение *</label>
+                        <textarea id="contactMessage" class="form-control" rows="5" required></textarea>
+                    </div>
+                    
+                    <button type="submit" class="btn">Отправить сообщение</button>
+                </form>
+            </div>
+        </div>
+        
+        <div class="map-placeholder">
+            🗺️ Здесь будет карта с расположением факультета
+        </div>
     </main>
 
     <footer>
@@ -96,6 +167,6 @@
         </div>
     </footer>
 
-    <script src="/faculty_site/js/scripts.js"></script>
+    <script src="js/scripts.js"></script>
 </body>
 </html>
