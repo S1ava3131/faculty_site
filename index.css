@@ -42,10 +42,28 @@ body {
 }
 
 /* Псевдоклассы для ссылок */
+.main-nav a:link {
+    color: #333;
+}
+
+.main-nav a:visited {
+    color: #666;
+}
+
 .main-nav a:hover {
     background: #667eea;
     color: white;
     transform: translateY(-2px);
+}
+
+.main-nav a:focus {
+    outline: 2px solid #667eea;
+    outline-offset: 2px;
+}
+
+.main-nav a:active {
+    background: #764ba2;
+    transform: scale(0.95);
 }
 
 .main-nav a.active {
@@ -53,8 +71,13 @@ body {
     color: white;
 }
 
-.main-nav a:visited {
-    color: #666;
+/* Псевдоклассы для навигации */
+.main-nav li:first-child a {
+    font-weight: bold;
+}
+
+.main-nav li:last-child a {
+    margin-right: 0;
 }
 
 /* Герой-секция */
@@ -94,6 +117,27 @@ body {
     transition: transform 0.3s ease;
 }
 
+/* Псевдоклассы для карточек */
+.feature-card:nth-child(odd) {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+}
+
+.feature-card:nth-child(even) {
+    background: white;
+    color: #333;
+}
+
+.feature-card:first-child {
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
+}
+
+.feature-card:last-child {
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+}
+
 .feature-card:hover {
     transform: translateY(-10px);
 }
@@ -101,6 +145,10 @@ body {
 .feature-card h3 {
     color: #667eea;
     margin-bottom: 1rem;
+}
+
+.feature-card:nth-child(odd) h3 {
+    color: white;
 }
 
 /* Секция с историями */
@@ -137,6 +185,15 @@ body {
     margin-bottom: 0.5rem;
 }
 
+/* Псевдоклассы для историй */
+.story-preview:first-child {
+    border-left-color: #e74c3c;
+}
+
+.story-preview:last-child {
+    margin-bottom: 0;
+}
+
 /* Футер */
 footer {
     background: rgba(0, 0, 0, 0.8);
@@ -144,4 +201,17 @@ footer {
     text-align: center;
     padding: 1rem;
     margin-top: auto;
+}
+
+/* ID селекторы для главной */
+#hero-section {
+    position: relative;
+}
+
+#features-grid {
+    display: grid;
+}
+
+#recent-stories {
+    background: rgba(255, 255, 255, 0.9);
 }

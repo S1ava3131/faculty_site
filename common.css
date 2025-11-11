@@ -42,10 +42,28 @@ body {
 }
 
 /* Псевдоклассы для навигации */
+.main-nav a:link {
+    color: #ecf0f1;
+}
+
+.main-nav a:visited {
+    color: #bdc3c7;
+}
+
 .main-nav a:hover {
     background: #3498db;
     color: white;
     transform: translateY(-2px);
+}
+
+.main-nav a:focus {
+    outline: 2px solid #3498db;
+    outline-offset: 2px;
+}
+
+.main-nav a:active {
+    background: #e74c3c;
+    transform: scale(0.95);
 }
 
 .main-nav a.active {
@@ -81,6 +99,17 @@ body {
     text-align: center;
     margin-bottom: 3rem;
     color: #2c3e50;
+    position: relative;
+}
+
+.page-header::after {
+    content: '';
+    display: block;
+    width: 100px;
+    height: 3px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    margin: 1rem auto;
+    border-radius: 2px;
 }
 
 .page-header h1 {
@@ -101,6 +130,18 @@ body {
     box-shadow: 0 5px 15px rgba(0,0,0,0.1);
     margin-bottom: 2rem;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
+    position: relative;
+}
+
+.card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border-radius: 10px 10px 0 0;
 }
 
 .card:hover {
@@ -120,4 +161,36 @@ footer {
 .footer-content {
     max-width: 1200px;
     margin: 0 auto;
+}
+
+/* Дополнительные классы */
+.text-center {
+    text-align: center;
+}
+
+.text-primary {
+    color: #3498db;
+}
+
+.bg-light {
+    background-color: #f8f9fa;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1rem;
+}
+
+/* ID селекторы */
+#main-header {
+    position: relative;
+}
+
+#main-content {
+    position: relative;
+}
+
+#page-footer {
+    margin-top: auto;
 }

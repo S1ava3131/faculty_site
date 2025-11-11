@@ -71,10 +71,38 @@
             background: #2980b9;
             transform: translateY(-2px);
         }
+
+        /* Псевдоклассы для contact.html */
+        .contact-item:nth-child(2n) {
+            background: #f8f9fa;
+            margin-left: -2rem;
+            margin-right: -2rem;
+            padding-left: 3rem;
+            padding-top: 1rem;
+            padding-bottom: 1rem;
+        }
+
+        .social-link:first-child {
+            background: #667eea;
+        }
+
+        .social-link:last-child {
+            background: #e74c3c;
+        }
+
+        /* ID селекторы */
+        #contactMap {
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        #contactForm {
+            position: relative;
+        }
     </style>
 </head>
 <body data-page="contact">
-    <header>
+    <header id="main-header">
         <nav class="main-nav">
             <ul>
                 <li><a href="index.html">Главная</a></li>
@@ -85,7 +113,7 @@
         </nav>
     </header>
 
-    <main class="main-content">
+    <main id="main-content">
         <div class="page-header">
             <h1>Свяжитесь с нами</h1>
             <p>Мы всегда рады ответить на ваши вопросы</p>
@@ -122,7 +150,7 @@
                 </div>
             </div>
             
-            <div class="contact-form">
+            <div id="contactForm" class="contact-form">
                 <h2>Форма обратной связи</h2>
                 <form>
                     <div class="form-group">
@@ -156,12 +184,12 @@
             </div>
         </div>
         
-        <div class="map-placeholder">
+        <div id="contactMap" class="map-placeholder">
             🗺️ Здесь будет карта с расположением факультета в Белгороде
         </div>
     </main>
 
-    <footer>
+    <footer id="page-footer">
         <div class="footer-content">
             <p>&copy; 2024 Факультет Информационных Технологий. Все права защищены.</p>
         </div>

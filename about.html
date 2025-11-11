@@ -62,10 +62,30 @@
             box-shadow: 0 5px 15px rgba(0,0,0,0.1);
             margin-bottom: 2rem;
         }
+
+        /* Псевдоклассы для about.html */
+        .department:nth-child(2n) {
+            background: linear-gradient(135deg, #3498db 0%, #2c3e50 100%);
+        }
+
+        .stat-item:first-child .stat-number {
+            color: #3498db;
+        }
+
+        .stat-item:last-child .stat-number {
+            color: #2ecc71;
+        }
+
+        /* ID селекторы */
+        #missionStatement {
+            font-style: italic;
+            border-left: 4px solid #3498db;
+            padding-left: 1rem;
+        }
     </style>
 </head>
 <body data-page="about">
-    <header>
+    <header id="main-header">
         <nav class="main-nav">
             <ul>
                 <li><a href="index.html">Главная</a></li>
@@ -76,7 +96,7 @@
         </nav>
     </header>
 
-    <main class="main-content">
+    <main id="main-content">
         <div class="page-header">
             <h1>О нашем факультете</h1>
             <p>Современное образование для будущих IT-лидеров</p>
@@ -84,7 +104,7 @@
 
         <section class="mission-section">
             <h2>Наша миссия</h2>
-            <p>Факультет Информационных Технологий готовит высококвалифицированных специалистов, способных решать сложные задачи в области информационных технологий и digital-инноваций.</p>
+            <p id="missionStatement">Факультет Информационных Технологий готовит высококвалифицированных специалистов, способных решать сложные задачи в области информационных технологий и digital-инноваций.</p>
         </section>
 
         <div class="stats">
@@ -121,7 +141,7 @@
         </section>
     </main>
 
-    <footer>
+    <footer id="page-footer">
         <div class="footer-content">
             <p>Факультет Информационных Технологий</p>
         </div>
