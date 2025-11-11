@@ -362,7 +362,7 @@
     </footer>
 
     <script>
-        // ВСТРОЕННЫЙ JAVASCRIPT - гарантированно работает
+        // ВСТРОЕННЫЙ JAVASCRIPT - полная функциональность
         console.log('Скрипт запущен!');
         
         document.addEventListener('DOMContentLoaded', function() {
@@ -376,7 +376,99 @@
             
             // Инициализация формы
             initForm();
+            
+            // Загружаем сохраненные истории
+            loadStories();
         });
+
+        // Функции для работы с localStorage
+        function saveStory(storyData) {
+            let stories = JSON.parse(localStorage.getItem('studentStories')) || [];
+            storyData.id = Date.now();
+            storyData.date = new Date().toLocaleDateString('ru-RU');
+            stories.unshift(storyData);
+            localStorage.setItem('studentStories', JSON.stringify(stories));
+            return stories;
+        }
+
+        function loadStories() {
+            const stories = JSON.parse(localStorage.getItem('studentStories')) || [];
+            const container = document.getElementById('storiesContainer');
+            
+            if (!container) return;
+            
+            // Удаляем старые сохраненные истории (чтобы не дублировать)
+            const oldStories = container.querySelectorAll('.story-item[data-saved="true"]');
+            oldStories.forEach(story => story.remove());
+            
+            // Добавляем сохраненные истории
+            stories.forEach((story, index) => {
+                const storyElement = createStoryElement(story);
+                container.insertBefore(storyElement, container.firstChild);
+                
+                // Анимация
+                setTimeout(() => {
+                    storyElement.style.opacity = '1';
+                    storyElement.style.transform = 'translateY(0)';
+                }, index * 100);
+            });
+        }
+
+        function createStoryElement(story) {
+            const article = document.createElement('article');
+            article.className = 'story-item';
+            article.setAttribute('data-course', story.course);
+            article.setAttribute('data-department', story.department);
+            article.setAttribute('data-saved', 'true');
+            
+            const departmentColors = {
+                'software': '#27ae60',
+                'ai': '#8e44ad', 
+                'security': '#d35400'
+            };
+            
+            const departmentNames = {
+                'software': 'Программная инженерия',
+                'ai': 'Искусственный интеллект',
+                'security': 'Кибербезопасность'
+            };
+            
+            const courseNames = {
+                '1': '1 курс',
+                '2': '2 курс', 
+                '3': '3 курс',
+                '4': '4 курс',
+                'graduate': 'Выпускник'
+            };
+
+            article.innerHTML = `
+                <div class="story-meta">
+                    <strong>${escapeHtml(story.name)}</strong>
+                    <span class="story-badge">${courseNames[story.course]}</span>
+                    <span class="story-badge" style="background: ${departmentColors[story.department]};">
+                        ${departmentNames[story.department]}
+                    </span>
+                </div>
+                <h3>${escapeHtml(story.title)}</h3>
+                <p>${escapeHtml(story.text)}</p>
+                <div class="story-meta">
+                    <small>Опубликовано: ${story.date}</small>
+                    ${story.email ? `<small>Email: ${escapeHtml(story.email)}</small>` : ''}
+                </div>
+            `;
+            
+            article.style.opacity = '0';
+            article.style.transform = 'translateY(20px)';
+            article.style.transition = 'all 0.6s ease';
+            
+            return article;
+        }
+
+        function escapeHtml(text) {
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
 
         function initFilters() {
             const filterCourse = document.getElementById('filterCourse');
@@ -429,7 +521,7 @@
         }
 
         function initAnimation() {
-            const stories = document.querySelectorAll('.story-item');
+            const stories = document.querySelectorAll('.story-item:not([data-saved="true"])');
             stories.forEach((story, index) => {
                 setTimeout(() => {
                     story.style.opacity = '1';
@@ -442,7 +534,9 @@
             const form = document.getElementById('storyForm');
             const textarea = document.getElementById('storyText');
             const counter = document.getElementById('textCounter');
+            const successMsg = document.getElementById('successMessage');
 
+            // Счетчик символов
             if (textarea && counter) {
                 textarea.addEventListener('input', function() {
                     const remaining = 2000 - this.value.length;
@@ -458,16 +552,53 @@
                 });
             }
 
+            // Обработка отправки формы
             if (form) {
                 form.addEventListener('submit', function(e) {
                     e.preventDefault();
-                    alert('Форма работает! История отправлена (в реальном проекте здесь была бы отправка на сервер)');
+                    
+                    // Собираем данные формы
+                    const formData = {
+                        name: document.getElementById('studentName').value.trim(),
+                        course: document.getElementById('studentCourse').value,
+                        department: document.getElementById('studentDepartment').value,
+                        title: document.getElementById('storyTitle').value.trim(),
+                        text: document.getElementById('storyText').value.trim(),
+                        email: document.getElementById('studentEmail').value.trim()
+                    };
+                    
+                    // Проверяем обязательные поля
+                    if (!formData.name || !formData.course || !formData.department || !formData.title || !formData.text) {
+                        alert('Пожалуйста, заполните все обязательные поля!');
+                        return;
+                    }
+                    
+                    // Сохраняем историю
+                    saveStory(formData);
+                    
+                    // Показываем сообщение об успехе
+                    if (successMsg) {
+                        successMsg.style.display = 'block';
+                    }
+                    
+                    // Сбрасываем форму
                     this.reset();
                     
+                    // Сбрасываем счетчик
                     if (counter) {
                         counter.textContent = 'Осталось символов: 2000';
                         counter.className = 'char-counter';
                     }
+                    
+                    // Перезагружаем список историй
+                    loadStories();
+                    
+                    // Скрываем сообщение через 5 секунд
+                    setTimeout(() => {
+                        if (successMsg) {
+                            successMsg.style.display = 'none';
+                        }
+                    }, 5000);
                 });
             }
         }
